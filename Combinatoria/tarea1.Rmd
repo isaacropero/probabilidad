@@ -1,0 +1,56 @@
+---
+title: "Tarea1"
+author: "Isaac Ropero"
+date: "30/12/2020"
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Preguntas de esta tarea 
+
+1. En una carrera en la que participan diez caballos ¿de cuántas maneras diferentes se pueden dar los cuatro primeros lugares?
+$$V^{k=4}_{n=10}=\frac{10!}{(10-4)!}=5040.$$
+2. Una empresa de reciente creación encarga a un diseñador gráfico la elaboración del su logotipo, indicando que ha de seleccionar exactamente tres colores de una lista de seis. ¿Cuántos grupos tienen para elegir el diseñador?
+$$
+\begin{array}{rl}
+{6\choose 3} = 20
+\end{array}
+$$
+3. ¿Cuántas palabras diferentes, de cuatro letras, se pueden formar con la palabra byte?
+$$PR^{1,1,1,1}_{4} = \frac{4!}{(1!)^4} = 24$$
+$$
+P_n=V_4^4=4!
+$$
+```{r}
+library(gtools)
+x <- c('b', 'y', 't', 'e')
+permutations(n=4,r=4,v=x,repeats.allowed = FALSE)
+```
+
+4. ¿De cuantas maneras diferentes se pueden elegir el director y el subdirector de un departamento formado por 50 miembros?
+$$
+V^{k=2}_{n=50}=2450.
+$$
+5. Con once empleados ¿cuántos comités de empresa de cinco personas se pueden formar?
+$$
+{11\choose5} = 462
+$$
+6. ¿Cuántas maneras distintas hay de colocar quince libros diferentes en una estantería si queremos que el de Probabilidades esté el primero y el de Estadística en el tercero?
+$$13!$$
+
+7. ¿Cuántos caracteres diferentes podemos formar utilizando a lo sumo a tres símbolos de los utilizados en el alfabeto Morse?
+
+*Permutacion con repeticion*
+$$2+2^2+2^3=14$$
+
+8. Un supermercado organiza una rifa con un premio de una botella de cava para todas las papeletas que tengan las dos últimas cifras iguales a las correspondientes dos últimas cifras del número premiado en el sorteo de Navidad. Supongamos que todos los décimos tienen cuatro cifras y que existe un único décimo de cada numeración ¿Cuántas botellas repartirá el supermercado?
+
+
+
+

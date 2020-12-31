@@ -1,0 +1,136 @@
+---
+title: "Combinatoria"
+author: "Isaac Ropero"
+date: "28/12/2020"
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Combinatoria. Número binomial. Combinaciones sin repetición
+**Número combinatorio o número binomial**
+
+Nos da el número de subconjuntos de tamaño $k$ de un conjunto de tamaño $n$. Este número es
+
+$$
+C_n^k={n\choose k} = \frac{n!}{k!\cdot (n-k)!}.
+$$
+
+**Ejemplo**
+*Por ejemplo si tenemos un equipo  de baloncesto con  7 jugadores ¿cuántos equipos de 5 jugadores distintos podemos formar?*
+$$
+\begin{array}{rl}
+{7\choose 5} = \frac{7!}{5!\cdot (7-5)!}=\frac{7!}{5!\cdot 2!}=\frac{6\cdot 7}{2}=\frac{42}{2}=21.
+\end{array}
+$$
+**combinations(n, r, v, set, repeats.allowed)**
+```{r}
+library(gtools)
+combinations(7, 5, letters[1:7])
+```
+
+## Combinatoria. Combinaciones con repetición
+
+En combinatoria, las combinaciones con repetición de un conjunto son las distintas formas en que se puede hacer una selección de elementos de un conjunto dado, permitiendo que las selecciones puedan repetirse.
+
+$$CR^k_n = \binom{n+k-1}{k} = \frac{(n+k-1)!}{k!(n-1)!}.$$
+<div class="example">
+**Ejemplo**
+
+Vamos a imaginar que vamos a repartir 12 caramelos entre Antonio, Beatriz, Carlos y Dionisio (que representaremos como A, B, C, D).
+Una posible forma de repartir los caramelos sería: dar 4 caramelos a Antonio, 3 a Beatriz, 2 a Carlos y 3 a Dionisio. Dado que no importa el orden en que se reparten, podemos representar esta selección como AAAABBBCCDDD. 
+
+Otra forma posible de repartir los caramelos podría ser: dar 1 caramelo a Antonio, ninguno a Beatriz y Carlos, los 11 restantes se los damos a Dionisio. Esta repartición la representamos como ADDDDDDDDDDD
+
+Recíprocamente, cualquier serie de 12 letras A, B, C, D se corresponde a una forma de repartir los caramelos. Por ejemplo, la serie AAAABBBBBDDD corresponde a:
+Dar 4 caramelos a Antonio, 5 caramelos a Beatriz, ninguno a Carlos y 3 a Dionisio.
+
+De esta forma, el número de formas de repartir los caramelos es: 
+
+$$CR_{12}^4 = \binom{12+4-1}{4}$$
+</div>
+
+## Combinatoria. Variaciones.
+
+**Variaciones**
+
+Con los número $\{1,2,3\}$ ¿cuántos números de dos cifras distintas  podemos  formar sin repetir ninguna cifra? 
+
+La podemos escribir
+
+$$12,13,21,23,31,32$$
+
+## Combinatoria. Variaciones(sin repetición)
+En nuestro ejemplo  con  $n=3$ dígitos  podemos escribir las siguientes variaciones de orden $k=2$
+
+$$
+V^{k=2}_{n=3}=\frac{3!}{(3-2)!}=\frac{1\cdot 2\cdot 3}{1}=6.
+$$
+
+<div class="exercise">
+**Ejercicio**
+
+```{r}
+permutations(3,2)
+```
+</div>
+
+\pagebreak
+## Combinatoria. Variaciones con repetición.
+
+**Variaciones con repetición**
+
+¿Y repitiendo algún dígito? 
+
+$$VR_n^k=n^k$$
+
+```{r}
+permutations(3,2, repeats.allowed = TRUE)
+```
+
+## Permutaciones
+
+Las permutaciones de un conjunto de cardinal $n$ son todas las variaciones de orden máximo $n$.
+Las denotamos y valen:
+
+$$
+P_n=V_n^n=n!
+$$
+
+Por ejemplo todos los números que se pueden escribir ordenando todos los dígitos $\{1,2,3\}$ sin repetir ninguno
+
+```{r,warning=FALSE,message=FALSE}
+library(combinat)
+for(permutacion in permn(3)) print(permutacion)
+```
+
+Efectivamente 
+$$
+P_3=3!=1\cdot  2\cdot 3.
+$$
+
+## Números multinomiales. Permutaciones con repetición. 
+
+Consideremos un conjunto de elementos $\{a_1, a_2, \ldots, a_k\}$.
+
+Entoces, si cada uno de los objetos $a_i$ de un conjunto, aparece repetido $n_i$ veces para cada $i$ desde 1 hasta $k$, entonces el número de permutaciones con elementos repetidos es: 
+
+$$PR_n^{n_1,n_2,\ldots,n_k} = {{n}\choose {n_1\quad n_2 \quad\ldots \quad n_k}}=\frac{n!}{n_1!\cdot n_2!\cdot \ldots \cdot n_k!},$$
+
+<div class="example">
+**Ejemplo**
+
+¿Cuantas palabras diferentes se pueden formar con las letras de la palabra `PROBABILIDAD`?
+
+El conjunto de letras de la palabra considerada es el siguiente:
+$\{A, B, D, I, L, O, P, R\}$ con las repeticiones siguientes: las letras A, B, D, e I, aparecen 2 veces cada una; y las letras L, O, P, R una vez cada una de ellas. 
+
+Por tanto, utilizando la fórmula anterior, tenemos que el número de palabras (permutaciones con elementos repetidos) que podemos formar es
+
+$$PR^{2,2,2,2,1,1,1,1}_{12} = \frac{12!}{(2!)^4(1!)^4} = 29937600.$$
+</div>
